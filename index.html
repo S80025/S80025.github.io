@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Aiman Hakim - Student Bento Grid Landing Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        /* * 1. Global Reset & Font Setup */
+        :root {
+            /* Rule 4: Clean, scientific, and modern color palette */
+            --color-white: #ffffff;
+            --color-light-grey: #f4f7f9;
+            --color-medium-grey: #e3e7eb;
+            --color-dark-grey: #333d47;
+            /* UPDATED Theme: Deep Ocean Blue (UMT Theme) */
+            --color-accent: #004d99; 
+            --color-text: #1a202c;
+            --color-subtle-text: #6b7280;
+            --border-radius: 12px;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-light-grey);
+            color: var(--color-text);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /*
+         * 2. Bento Grid Container 
+         * Rule 2: Grid layout on desktop.
+         */
+        .bento-grid {
+            width: 100%;
+            max-width: 1200px;
+            display: grid;
+            gap: 20px;
+            /* Define the desktop grid structure: 4 columns */
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: minmax(150px, auto); /* Set minimum row height */
+        }
+
+        /* * 3. Card Styling (The Bento Box) */
+        .card {
+            background-color: var(--color-white);
+            border: 1px solid var(--color-medium-grey);
+            border-radius: var(--border-radius);
+            padding: 24px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden; 
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            margin-bottom: 12px;
+        }
+
+        .card-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--color-dark-grey);
+            margin-bottom: 4px;
+        }
+
+        .card-subtitle {
+            font-size: 0.85em;
+            color: var(--color-subtle-text);
+        }
+
+        .card-content {
+            font-size: 1em;
+            color: var(--color-text);
+            line-height: 1.5;
+        }
+
+        /* Profile Card Specific Styles */
+        .card-profile .profile-details h1 {
+            font-size: 2em;
+            font-weight: 800;
+            margin-bottom: 4px;
+            color: var(--color-accent);
+        }
+        .card-profile .tagline {
+            font-style: italic;
+            font-weight: 500;
+            color: var(--color-subtle-text);
+            margin-top: 10px;
+            border-top: 1px dashed var(--color-medium-grey);
+            padding-top: 10px;
+        }
+
+        .card-profile .profile-details p {
+            font-size: 1em;
+            color: var(--color-dark-grey);
+            margin-bottom: 4px;
+        }
+
+        .card-profile .social-links a {
+            color: var(--color-subtle-text);
+            margin-right: 15px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .card-profile .social-links a:hover {
+            color: var(--color-accent);
+        }
+
+        /* Location Card Specific Styles */
+        .card-location {
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            /* Applies the new Ocean Blue accent */
+            background-color: var(--color-accent);
+            color: var(--color-white);
+        }
+        .card-location .card-title {
+            color: var(--color-white);
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+        .card-location .card-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.2em;
+        }
+
+        /* Tech Stack/Subjects Styling */
+        .subjects-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .subjects-list li {
+            background-color: var(--color-light-grey);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            font-weight: 500;
+            color: var(--color-dark-grey);
+        }
+        
+        /* Playlist Card Styling */
+        .card-playlist {
+            padding: 15px;
+        }
+        .music-player-placeholder {
+            background-color: var(--color-dark-grey);
+            color: var(--color-white);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 500;
+        }
+
+
+        /* * 4. Grid Area Definitions (Desktop Layout) */
+        
+        /* Card 1 (Profile): Large box (2x2) */
+        .card-1 { grid-column: span 2; grid-row: span 2; }
+        /* Card 2 (Location): Small box (1x1) */
+        .card-2 { grid-column: span 1; grid-row: span 1; }
+        /* Card 3 (Tech Stack): Medium box (1x1) */
+        .card-3 { grid-column: span 1; grid-row: span 1; }
+        /* Card 4 (Case Study): Medium box (2x1) */
+        .card-4 { grid-column: span 2; grid-row: span 1; }
+        /* Card 5 (Hobby): Small box (1x1) */
+        .card-5 { grid-column: span 1; grid-row: span 1; }
+        /* Card 6 (Playlist): Wide box at the bottom (4x1) */
+        .card-6 { grid-column: span 4; grid-row: span 1; }
+
+
+        /* * 5. Responsiveness (Mobile Layout)
+         * Rule 2: Stacked vertically on mobile.
+         */
+        @media (max-width: 768px) {
+            .bento-grid {
+                /* Overwrite desktop grid: single column */
+                grid-template-columns: 1fr;
+                grid-auto-rows: minmax(100px, auto);
+            }
+            
+            /* Reset all grid spans to default (1 column, 1 row) for stacking */
+            .card-1, .card-2, .card-3, .card-4, .card-5, .card-6 {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            /* Increase size of main profile card on mobile for prominence */
+            .card-1 {
+                min-height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bento-grid">
+
+    <div class="card card-1 card-profile">
+        <div>
+            <div class="profile-details">
+                <h1>Muhammad Aiman Hakim bin Ruslan</h1>
+                <p><strong>Program:</strong> Agrotechnology Science</p>
+                <p><strong>Year:</strong> Year 1</p>
+            </div>
+            <p class="tagline">'Keep Planting to save the earth.'</p>
+        </div>
+        <div class="social-links">
+            <a href="#" target="_blank">LinkedIn</a>
+            <a href="#" target="_blank">GitHub</a>
+            <a href="#" target="_blank">UMT Portal</a>
+        </div>
+    </div>
+
+    <div class="card card-2 card-location">
+        <div class="card-header">
+            <h2 class="card-title">Kuala Nerus</h2>
+        </div>
+        <div class="card-content">
+            <p class="card-subtitle">Universiti Malaysia Terengganu (UMT)</p>
+            <p class="card-subtitle">Current Time: 10:53 AM</p>
+        </div>
+    </div>
+
+    <div class="card card-3">
+        <div class="card-header">
+            <h2 class="card-title">Current Skills & Subjects</h2>
+            <p class="card-subtitle">Technical and Academic Focus</p>
+        </div>
+        <div class="card-content">
+            <ul class="subjects-list">
+                <li>Soil Science</li>
+                <li>Microbiology</li>
+                <li>Data Analysis (Excel)</li>
+                <li>Lab Analysis Techniques</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card card-4">
+        <div class="card-header">
+            <h2 class="card-title">Recent Project Focus</h2>
+            <p class="card-subtitle">Agrotechnology Material Science</p>
+        </div>
+        <div class="card-content">
+            <p><strong>Title:</strong> Coco Husk as the Main Structure for Coir Fiber Pot</p>
+            <p><strong>Description:</strong> Analyzing the durability, water retention, and decomposition rate of coconut husk to develop an environmentally friendly seedling container.</p>
+        </div>
+    </div>
+
+    <div class="card card-5">
+        <div class="card-header">
+            <h2 class="card-title">Leisure</h2>
+            <p class="card-subtitle">Activity to unwind</p>
+        </div>
+        <div class="card-content">
+            <p>Enjoying a session of **playing badminton** in the evening—a great way to balance studies and maintain energy.</p>
+        </div>
+    </div>
+
+    <div class="card card-6 card-playlist">
+        <div class="card-header">
+            <h2 class="card-title">Focus Soundtrack</h2>
+            <p class="card-subtitle">Current Music Vibe</p>
+        </div>
+        <div class="card-content">
+            <div class="music-player-placeholder">
+                Playing Now: Bittersweet - Madison Beer
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
