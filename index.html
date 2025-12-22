@@ -8,7 +8,6 @@
     <style>
         /* * 1. Global Reset & Font Setup */
         :root {
-            /* Rule 4: Clean, scientific, and modern color palette */
             --color-white: #ffffff;
             --color-light-grey: #f4f7f9;
             --color-medium-grey: #e3e7eb;
@@ -37,9 +36,7 @@
             padding: 20px;
         }
 
-        /*
-         * 2. Bento Grid Container 
-         */
+        /* * 2. Bento Grid Container */
         .bento-grid {
             width: 100%;
             max-width: 1200px;
@@ -90,27 +87,20 @@
             line-height: 1.5;
         }
 
-        /* --- Profile Card Specific Styles (UPDATED FOR BG IMAGE) --- */
+        /* --- Profile Card Specific Styles --- */
         .card-1 { 
-    grid-column: 1 / span 2; 
-    grid-row: 1 / span 2; 
-    
-    /* 1. Set the Image Source */
-    background-image: url('background.jpg'); 
-    
-    /* 2. Sizing and Positioning for Cover Effect */
-    background-size: cover;      /* Makes the image fully cover the card area */
-    background-position: center; /* Centers the image within the card */
-    background-repeat: no-repeat;/* Prevents the image from repeating */
-    
-    /* 3. Contrast & Layering */
-    position: relative; /* Essential for placing the overlay on top of the image */
-    z-index: 1; 
-    background-color: var(--color-dark-grey); /* Fallback color */
-    color: var(--color-white); /* Ensures default text is light */
-}
+            grid-column: 1 / span 2; 
+            grid-row: 1 / span 2; 
+            background-image: url('background.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            z-index: 1; 
+            background-color: var(--color-dark-grey);
+            color: var(--color-white);
+        }
 
-        /* Dark Overlay for Text Contrast */
         .card-1::before {
             content: '';
             position: absolute;
@@ -118,25 +108,24 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(0, 0, 0, 0.35); /* 35% black transparency for good contrast */
+            background-color: rgba(0, 0, 0, 0.35);
             border-radius: var(--border-radius);
             z-index: 2;
         }
 
-        /* Ensure content is positioned above the overlay */
         .card-profile > div {
             position: relative;
             z-index: 3;
         }
 
         .card-profile .profile-details h1 {
-            /* Force white color over dark background/overlay */
             color: var(--color-white) !important;
             font-size: 2em;
             font-weight: 800;
             margin-bottom: 4px;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
         }
+
         .card-profile .tagline {
             font-style: italic;
             font-weight: 500;
@@ -163,7 +152,6 @@
         .card-profile .social-links a:hover {
             color: var(--color-light-grey);
         }
-        /* --- END OF PROFILE CARD UPDATES --- */
 
         /* Location Card Specific Styles */
         .card-location {
@@ -181,6 +169,43 @@
         .card-location .card-subtitle {
             color: rgba(255, 255, 255, 0.8);
             font-size: 1.2em;
+        }
+
+        /* Case Study Card Layout Adjustment */
+        .card-4-layout {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            height: 100%;
+        }
+        .card-4-text {
+            flex: 2;
+        }
+        .card-4-action {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* New Focus Timer Button */
+        .btn-focus {
+            display: inline-block;
+            background-color: var(--color-accent);
+            color: var(--color-white);
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9em;
+            text-align: center;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 4px 12px rgba(0, 77, 153, 0.2);
+        }
+
+        .btn-focus:hover {
+            background-color: #003366;
+            transform: translateY(-2px);
         }
 
         /* Tech Stack/Subjects Styling */
@@ -216,22 +241,13 @@
             font-weight: 500;
         }
 
-
         /* * 4. Grid Area Definitions (Desktop Layout) */
-        
-        /* Card 1 (Profile): Large box (2x2) */
         .card-1 { grid-column: 1 / span 2; grid-row: 1 / span 2; }
-        /* Card 2 (Location): Small box (1x1) */
         .card-2 { grid-column: 3 / span 1; grid-row: 1 / span 1; } 
-        /* Card 3 (Tech Stack): Medium box (1x1) */
         .card-3 { grid-column: 4 / span 1; grid-row: 1 / span 1; }
-        /* Card 4 (Case Study): Medium box (2x1) */
         .card-4 { grid-column: 3 / span 2; grid-row: 2 / span 1; }
-        /* Card 5 (Hobby): Small box (1x1) */
         .card-5 { grid-column: 1 / span 1; grid-row: 3 / span 1; }
-        /* Card 7 (Reflection): NEW CARD - Next to Hobby */
         .card-7 { grid-column: 2 / span 2; grid-row: 3 / span 1; }
-        /* Card 6 (Playlist): Wide box at the bottom (4x1) */
         .card-6 { grid-column: 1 / span 4; grid-row: 4 / span 1; }
 
         /* * 5. Responsiveness (Mobile Layout) */
@@ -241,10 +257,14 @@
                 grid-auto-rows: minmax(100px, auto);
             }
             
-            /* Reset all grid spans to default (1 column, 1 row) for stacking */
             .card-1, .card-2, .card-3, .card-4, .card-5, .card-6, .card-7 {
                 grid-column: span 1;
                 grid-row: span 1;
+            }
+
+            .card-4-layout {
+                flex-direction: column;
+                text-align: center;
             }
 
             .card-1 {
@@ -299,13 +319,20 @@
     </div>
 
     <div class="card card-4">
-        <div class="card-header">
-            <h2 class="card-title">Recent Project Focus</h2>
-            <p class="card-subtitle">Agrotechnology Material Science</p>
-        </div>
-        <div class="card-content">
-            <p><strong>Title:</strong> Coco Husk as the Main Structure for Coir Fiber Pot</p>
-            <p><strong>Description:</strong> Analyzing the durability, water retention, and decomposition rate of coconut husk to develop an environmentally friendly seedling container.</p>
+        <div class="card-4-layout">
+            <div class="card-4-text">
+                <div class="card-header">
+                    <h2 class="card-title">Recent Project Focus</h2>
+                    <p class="card-subtitle">Agrotechnology Material Science</p>
+                </div>
+                <div class="card-content">
+                    <p><strong>Title:</strong> Coco Husk as the Main Structure for Coir Fiber Pot</p>
+                    <p>Analyzing durability and decomposition to develop eco-friendly containers.</p>
+                </div>
+            </div>
+            <div class="card-4-action">
+                <a href="https://s80025.github.io/focus-timer-app/app.html" target="_blank" class="btn-focus">Try My Focus Timer App</a>
+            </div>
         </div>
     </div>
 
@@ -315,7 +342,7 @@
             <p class="card-subtitle">Activity to unwind</p>
         </div>
         <div class="card-content">
-            <p>Enjoying a session of **playing badminton** in the evening—a great way to balance studies and maintain energy.</p>
+            <p>Enjoying a session of **playing badminton** in the evening—a great way to balance studies.</p>
         </div>
     </div>
     
@@ -325,7 +352,7 @@
             <p class="card-subtitle">Why replanting a tree is important in Malaysia</p>
         </div>
         <div class="card-content">
-            <p>Reforestation is a main factor why replanting is needed. By implementing sustainable local processing methods, we can mitigate the effects of global warming and promote biodiversity.</p>
+            <p>Reforestation mitigates global warming and promotes biodiversity through sustainable local processing.</p>
         </div>
     </div>
 
@@ -337,4 +364,12 @@
         <div class="card-content">
             <div class="music-player-placeholder">
                 Playing Now: Bittersweet - Madison Beer
-            <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/3A02hWQ2ebOFDWSbAMNnpw?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                <iframe data-testid="embed-iframe" style="border-radius:12px; margin-top: 10px;" src="https://open.spotify.com/embed/track/3A02hWQ2ebOFDWSbAMNnpw?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
